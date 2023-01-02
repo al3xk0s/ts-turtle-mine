@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/TypeScriptToLua/TypeScriptToLua/master/tsconfig-schema.json",
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["ES6", "DOM"],
+    "moduleResolution": "Node",
+    "types": [
+      "@typescript-to-lua/language-extensions"
+    ],
+    "strict": true,
+    "outDir": "dist",
+  },
+  "include": [
+      "src/**/*"
+  ],
+  "tstl": {
+    "luaTarget": "5.1"
+  }
+}
