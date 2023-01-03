@@ -17,6 +17,7 @@ type TurtleFuel = number | TurtleFuelUnlimited;
 declare interface TurtleAPI {
     forward(): TurtleDoResult;
     back(): TurtleDoResult;
+    up(): TurtleDoResult;
     down(): TurtleDoResult;
     turnLeft(): TurtleDoResult;
     turnRight(): TurtleDoResult;
