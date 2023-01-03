@@ -1,74 +1,79 @@
 import { Axis } from "./Axis";
 import { IMoveSet } from "./IMoveSet";
 import { Position } from "./Position";
+import { PredictMoveSet } from "./PredictMoveSet";
 import { TurtleHeadDirection } from "./TurtleHeadDirection";
 
 export class MoveSet implements IMoveSet {
     constructor(
-        position: Position,
-        public readonly direction: TurtleHeadDirection
+        initialPosition: Position,
+        initialDirection: TurtleHeadDirection,
     ) {
-        this._positon = position;
+        this._positon = initialPosition;
+        this._direction = initialDirection;
     }
 
     private _positon: Position;
+    private _direction: TurtleHeadDirection;
 
     get position(): Position { return this._positon }
+    get direction() : TurtleHeadDirection { return this._direction; }
+
+    createPredict() {
+        return new PredictMoveSet(this.position, this.direction);
+    }
 
     forward(): boolean {
-        const changePosition = () => this.calculateNewHorizontalPosition(this.getDirectionMultiplier());
+        const changePosition = (predictMoveset: IMoveSet) => {
+            predictMoveset.forward();
+            this._positon = predictMoveset.position;
+        }
         return this.doMove(turtle.forward, changePosition);
     }
 
     back(): boolean {
-        const changePosition = () => this.calculateNewHorizontalPosition(this.getInvertedMultiplier());
+        const changePosition = (predictMoveset: IMoveSet) => {
+            predictMoveset.back();
+            this._positon = predictMoveset.position;
+        }
         return this.doMove(turtle.back, changePosition);
     }
 
     up(): boolean {
-        const changePosition = () => this.calcualteNewVerticalPostion(this.getDirectionMultiplier());
+        const changePosition = (predictMoveset: IMoveSet) => {
+            predictMoveset.up();
+            this._positon = predictMoveset.position;
+        }
         return this.doMove(turtle.up, changePosition);
     }
 
     down(): boolean {
-        const changePosition = () => this.calcualteNewVerticalPostion(this.getInvertedMultiplier());
+        const changePosition = (predictMoveset: IMoveSet) => {
+            predictMoveset.down();
+            this._positon = predictMoveset.position;
+        }
         return this.doMove(turtle.down, changePosition);
     }
 
     turnLeft(): boolean {
-        const changeDirection = () => this.direction.previous();
+        const changeDirection = (predictMoveset: IMoveSet) => {
+            predictMoveset.turnLeft();
+            this._direction = predictMoveset.direction;
+        }
         return this.doMove(turtle.turnLeft, changeDirection);
     }
 
     turnRight(): boolean {
-        const changeDirection = () => this.direction.next();
+        const changeDirection = (predictMoveset: IMoveSet) => {
+            predictMoveset.forward();
+            this._direction = predictMoveset.direction;
+        }
         return this.doMove(turtle.turnRight, changeDirection);
     }
 
-    private doMove(delegate: () => TurtleDoResult, handler: () => void) {
+    private doMove(delegate: () => TurtleDoResult, handler: (predictMoveset: IMoveSet) => void) {
         const [success, raison] = delegate();
+        if(success) handler(this.createPredict());
         return success;
-    }
-
-    private calculateNewHorizontalPosition(multiplier: number) {
-        if (this.direction.axis == Axis.X)
-            return this.position.copyWith({ x: this.position.x + multiplier })
-        return this.position.copyWith({ y: this.position.y + multiplier })
-    }
-
-    private calcualteNewVerticalPostion(multiplier: number) {
-        return this.position.copyWith({ z: this.position.z + multiplier })
-    }
-
-    private getDirectionMultiplier() {
-        return this.direction.willIncrease ? 1 : -1;
-    }
-
-    private getInvertedMultiplier() {
-        return this.inverMultiplier(this.getDirectionMultiplier())
-    }
-
-    private inverMultiplier(multiplier: number) {
-        return multiplier * -1;
     }
 }

@@ -24,20 +24,20 @@ export class TurtleHeadDirection {
 
     }
 
-    public static next(direction: TurtleHeadDirection) : TurtleHeadDirection {
-        const currentIndex = this.findIndexByDirection(direction);
-        const targetIndex = (currentIndex + 1) % this.turtleHeadDirections.length;
-        return this.turtleHeadDirections[targetIndex]
+    public next() : TurtleHeadDirection {
+        const currentIndex = this.findIndexByDirection();
+        const targetIndex = (currentIndex + 1) % TurtleHeadDirection.turtleHeadDirections.length;
+        return TurtleHeadDirection.turtleHeadDirections[targetIndex]
     }
 
-    public static previous(direction: TurtleHeadDirection) : TurtleHeadDirection{
-        const currentIndex = this.findIndexByDirection(direction);
+    public previous() : TurtleHeadDirection{
+        const currentIndex = this.findIndexByDirection();
         const targetIndex = currentIndex - 1 < 1 ? this.findIndexByDirection.length - 1 : currentIndex - 1;
-        return this.turtleHeadDirections[targetIndex];
+        return TurtleHeadDirection.turtleHeadDirections[targetIndex];
     }
 
-    private static findIndexByDirection(direction : TurtleHeadDirection): number {
-        return this.turtleHeadDirections.findIndex(x => x.name == direction.name);
+    private findIndexByDirection(): number {
+        return TurtleHeadDirection.turtleHeadDirections.findIndex(x => x.name == this.name);
     }
 }
 
