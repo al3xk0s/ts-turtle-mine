@@ -59,6 +59,15 @@ export class PredictMoveSet implements IMoveSet {
         return true;
     }
 
+    copy(args?: { position?: Position, direction?: TurtleHeadDirection }) {
+        const { position, direction } = args ?? {};
+
+        return new PredictMoveSet(
+            position ?? this.position,
+            direction ?? this.direction,
+        );
+    }
+
     private calculateNewHorizontalPosition(multiplier: number) {
         if (this.direction.axis == Axis.X)
             return this.position.copyWith({ x: this.position.x + multiplier })

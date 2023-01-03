@@ -8,19 +8,22 @@ export class MoveSet implements IMoveSet {
     constructor(
         initialPosition: Position,
         initialDirection: TurtleHeadDirection,
+
     ) {
         this._positon = initialPosition;
         this._direction = initialDirection;
+        this._predictMoveset = new PredictMoveSet(initialPosition, initialDirection);
     }
 
     private _positon: Position;
     private _direction: TurtleHeadDirection;
+    private _predictMoveset: PredictMoveSet;
 
     get position(): Position { return this._positon }
     get direction() : TurtleHeadDirection { return this._direction; }
 
     createPredict() {
-        return new PredictMoveSet(this.position, this.direction);
+        return this._predictMoveset.copy();
     }
 
     forward(): boolean {
@@ -73,7 +76,7 @@ export class MoveSet implements IMoveSet {
 
     private doMove(delegate: () => TurtleDoResult, handler: (predictMoveset: IMoveSet) => void) {
         const [success, raison] = delegate();
-        if(success) handler(this.createPredict());
+        if(success) handler(this._predictMoveset);
         return success;
     }
 }

@@ -7,8 +7,8 @@ export class Position {
     ) {
     }
 
-    copyWith(args:{x?:number, y?:number, z?:number}){
-        const {x,y,z} = args;
+    copyWith(args?: {x?:number, y?:number, z?:number}){
+        const {x, y, z} = args ?? {};
         return new Position(x ?? this.x, y ?? this.y, z ?? this.z );
     }
 }
