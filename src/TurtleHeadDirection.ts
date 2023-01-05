@@ -32,7 +32,7 @@ export class TurtleHeadDirection {
 
     public previous() : TurtleHeadDirection{
         const currentIndex = this.findIndexByDirection();
-        const targetIndex = currentIndex - 1 < 1 ? this.findIndexByDirection.length - 1 : currentIndex - 1;
+        const targetIndex = currentIndex - 1 < 1 ? TurtleHeadDirection.turtleHeadDirections.length - 1 : currentIndex - 1;
         return TurtleHeadDirection.turtleHeadDirections[targetIndex];
     }
 

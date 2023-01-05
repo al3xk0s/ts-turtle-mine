@@ -8,7 +8,7 @@ class TryTurtleDoHandler implements ITryTurtleDoHandler {
     constructor(
         private readonly executor: () => boolean, 
         private readonly handler: () => void,
-        public readonly attemptLimit: number,
+        private readonly attemptLimit: number,
     ) { }
 
     private _currentAttemptCount: number = 0;
@@ -32,5 +32,6 @@ class TryTurtleDoHandler implements ITryTurtleDoHandler {
     get currentAttemptCount(): number {
         return this._currentAttemptCount;
     }
+    
 }
 
