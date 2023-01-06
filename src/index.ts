@@ -1,3 +1,7 @@
-turtle.turnLeft();
-turtle.back();
-turtle.attack();
+import { KeyBoardControlVisualization } from "./KeyBoardContolVisualization";
+
+
+let visualization = new KeyBoardControlVisualization();
+visualization.Show(); 
+
+
