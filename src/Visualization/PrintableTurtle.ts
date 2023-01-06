@@ -1,8 +1,7 @@
-import { IMoveSet } from "./IMoveSet";
+import { MoveSet } from "../TurtleCore/MoveSet";
+import { Position } from "../TurtleCore/Position";
+import { TurtleHeadDirection } from "../TurtleCore/TurtleHeadDirection";
 import { IPrintable } from "./IPrintable";
-import { MoveSet } from "./MoveSet";
-import { Position } from "./Position";
-import { TurtleHeadDirection } from "./TurtleHeadDirection";
 
 export class PrintableTurtle extends MoveSet implements IPrintable {
     
@@ -25,7 +24,7 @@ export class PrintableTurtle extends MoveSet implements IPrintable {
     }
 
     
-    getModel(): string {
+    public getModel(): string {
         let result = this.models.get(this.direction);
 
         if(result == undefined) throw new Error("Unknown direction")

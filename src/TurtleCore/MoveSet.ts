@@ -27,7 +27,7 @@ export class MoveSet implements IMoveSet {
     }
 
     forward(): boolean {
-        const changePosition = (predictMoveset: IMoveSet) => {
+        const changePosition = ( predictMoveset: IMoveSet) => {
             predictMoveset.forward();
             this._positon = predictMoveset.position;
         }

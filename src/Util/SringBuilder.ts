@@ -1,6 +1,6 @@
 export class StringBuilder
  {
-    strArray: Array<string> = new Array<string>();
+    strArray: string[] = [];
     constructor()
     {
         
@@ -21,7 +21,7 @@ export class StringBuilder
     toString(): string
     {
         let str:string = this.strArray.join("");
-        return(str);
+        return str;
     }
 
     joinToString(delimeter: string): string {

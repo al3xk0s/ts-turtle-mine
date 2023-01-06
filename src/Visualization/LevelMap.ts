@@ -1,5 +1,5 @@
-import { PrintableTurtle } from "./Printable";
-import { StringBuilder } from "./SringBuilder";
+import { PrintableTurtle } from "./PrintableTurtle";
+import { StringBuilder } from "../Util/SringBuilder";
 
 export class LevelMap {
     constructor(
@@ -12,7 +12,7 @@ export class LevelMap {
     public getModel(): string {
 
         let model = this.createModel(this.rowCount, this.columnCount, "|")
-        model.setElement(this.turtle.position.x, this.turtle.position.y)
+        model.setElement(this.turtle.position.x, this.turtle.position.y, this.turtle.getModel())
 
         return model.toString();
     }
@@ -31,8 +31,8 @@ class Chunk {
 
     }
     
-    public setElement(row:number,column:number){
-        this.model[row][column];
+    public setElement(row:number,column:number, symbol:string){
+        this.model[row][column] = symbol;
     }
     public getElement(row:number, column:number){
         return this.model[row][column];
@@ -42,14 +42,16 @@ class Chunk {
 
         let sb: StringBuilder = new StringBuilder();
 
+        let model = "";
+
         for (let row = 0; row < this.rowCount; row++) {
             let layer: string[] = []
             for (let column = 0; column < this.columnCount; column++) {
-                sb.append(this.model[row][column]);
+                model = model + this.model[row][column];
             }
-            sb.append('\n');
+            model = model + '\n';
         }
-        return sb.toString()
+        return model
     }
     
     public static Create(rowCount: number, columnCount: number, defaultSymbol: string){

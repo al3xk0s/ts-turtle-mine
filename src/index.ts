@@ -1,7 +1,13 @@
-import { KeyBoardControlVisualization } from "./KeyBoardContolVisualization";
+import { KeyBoardControlVisualization } from "./Visualization/KeyBoardContolVisualization";
 
+class Program{
 
-let visualization = new KeyBoardControlVisualization();
-visualization.Show(); 
+    public static Main(){
+        let visualization = new KeyBoardControlVisualization();
+        visualization.Show(); 
+    }
+}
 
+let program = new Program();
+Program.Main();
 

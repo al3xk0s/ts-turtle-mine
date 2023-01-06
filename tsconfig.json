@@ -4,6 +4,7 @@
     "target": "ES6",
     "lib": ["ES6", "DOM"],
     "moduleResolution": "Node",
+    "sourceMap": true,
     "types": [
       "@typescript-to-lua/language-extensions"
     ],
@@ -15,6 +16,7 @@
       "src/**/*"
   ],
   "tstl": {
-    "luaTarget": "5.1"
+    "luaTarget": "5.1",
+    "sourceMapTraceback": true
   }
 }

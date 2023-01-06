@@ -1,17 +1,17 @@
 import { LevelMap } from "./LevelMap";
-import { PrintableTurtle } from "./Printable";
+import { PrintableTurtle } from "./PrintableTurtle";
 
 export class KeyBoardControlVisualization{
     
     private turtle: PrintableTurtle = new PrintableTurtle();
 
-    private map = new LevelMap(5, 10 ,this.turtle);
+    private map = new LevelMap(10, 5 ,this.turtle);
 
-    private keyDelegateMap:Map<string, ()=>boolean >;
+    private keyDelegateMap:LuaMap;
 
 
     public constructor(){
-        let keyDelegateMap = new Map<string, ()=>boolean >;
+        let keyDelegateMap = new LuaMap();
         keyDelegateMap.set("w", this.turtle.forward);
         keyDelegateMap.set("s", this.turtle.back);
         keyDelegateMap.set("a", this.turtle.turnLeft);
@@ -28,8 +28,8 @@ export class KeyBoardControlVisualization{
             let key = io.read()
             let delegate = this.keyDelegateMap.get(key)
             
-            if(delegate == null) throw new Error("Ошибочка");
-
+            if(delegate == null) throw new Error("Wron key");
+            delegate(this.turtle)
             print(this.map.getModel());
             print("x: " + this.turtle.position.x, "y: "+ this.turtle.position.y, "z: " + this.turtle.position.z, this.turtle.direction.name)
         }
