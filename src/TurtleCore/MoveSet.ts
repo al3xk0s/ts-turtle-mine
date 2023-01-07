@@ -4,6 +4,7 @@ import { Position } from "./Position";
 import { PredictMoveSet } from "./PredictMoveSet";
 import { TurtleHeadDirection } from "./TurtleHeadDirection";
 
+
 export class MoveSet implements IMoveSet {
     constructor(
         initialPosition: Position,
@@ -74,7 +75,7 @@ export class MoveSet implements IMoveSet {
         return this.doMove(turtle.turnRight, changeDirection);
     }
 
-    private doMove(delegate: () => TurtleDoResult, handler: (predictMoveset: IMoveSet) => void) {
+    private doMove(delegate: (this:void) => TurtleDoResult, handler: (predictMoveset: IMoveSet) => void) {
         const [success, raison] = delegate();
         if(success) handler(this._predictMoveset);
         return success;
