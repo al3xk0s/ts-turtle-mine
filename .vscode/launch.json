@@ -8,8 +8,9 @@
             "type": "lua",
             "request": "launch",
             "name": "Debug",
-            "cwd" : "${workspaceFolder}\\dist",
-            "program": "${workspaceFolder}\\dist\\index.lua",
+            "path": "${workspaceFolder}/dist/?.lua",
+            "program": "${workspaceFolder}/dist/index.lua",
+            "stopOnEntry": false,
             "preLaunchTask": "build_progect",
         }
     ]
