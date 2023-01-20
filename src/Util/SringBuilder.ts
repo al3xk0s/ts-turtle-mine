@@ -13,8 +13,8 @@ export class StringBuilder
     {
         return this.strArray.length === 0;
     }
-    append(str: string): void {
-        if (!str) {
+    append(str?: string): void {
+        if (str != null) {
             this.strArray.push(str);
         }
     }

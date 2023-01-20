@@ -1,6 +1,8 @@
 import { IMoveSet } from "./IMoveSet"
 import { Position } from "./Position";
+import { turtleDI } from "./TurtleBinding";
 import { TurtleHeadDirection } from "./TurtleHeadDirection";
+
 
 export class DigTryMoveSet implements IMoveSet {
     constructor(
@@ -18,8 +20,8 @@ export class DigTryMoveSet implements IMoveSet {
     forward(): boolean {
         
         const handler = () =>{
-            turtle.dig()
-            turtle.attack()
+            turtleDI.getTurtle().dig()
+            turtleDI.getTurtle().attack()
         }
 
         return new TryTurtleDoHandler(this._moveSet.forward, handler, this.attemptLimit).exec();
@@ -27,11 +29,11 @@ export class DigTryMoveSet implements IMoveSet {
     back(): boolean {
 
         const intermediateStepsHandler = () =>{
-            turtle.turnRight();
-            turtle.turnRight();
+            turtleDI.getTurtle().turnRight();
+            turtleDI.getTurtle().turnRight();
             this.forward();
-            turtle.turnRight();
-            turtle.turnRight();
+            turtleDI.getTurtle().turnRight();
+            turtleDI.getTurtle().turnRight();
         }
                 
         return new TryTurtleDoHandler(this._moveSet.back, intermediateStepsHandler, this.attemptLimit).exec();
@@ -39,8 +41,8 @@ export class DigTryMoveSet implements IMoveSet {
     up(): boolean {
 
         const intermediateStepsHandler = () =>{
-            turtle.digUp()
-            turtle.attackUp()
+            turtleDI.getTurtle().digUp()
+            turtleDI.getTurtle().attackUp()
         }
 
         return new TryTurtleDoHandler(this._moveSet.up, intermediateStepsHandler, this.attemptLimit).exec();
@@ -48,8 +50,8 @@ export class DigTryMoveSet implements IMoveSet {
     down(): boolean {
 
         const intermediateStepsHandler = () =>{
-            turtle.digDown()
-            turtle.attackDown()
+            turtleDI.getTurtle().digDown()
+            turtleDI.getTurtle().attackDown()
         }
         return new TryTurtleDoHandler(this._moveSet.down, intermediateStepsHandler, this.attemptLimit).exec();
     }

@@ -1,7 +1,6 @@
 import { Position } from "./Position";
 import { TurtleHeadDirection } from "./TurtleHeadDirection";
 
-
 export interface IMoveSet {
 
     get position(): Position;

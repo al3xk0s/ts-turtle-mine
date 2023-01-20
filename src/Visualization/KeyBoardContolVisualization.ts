@@ -29,7 +29,7 @@ export class KeyBoardControlVisualization{
             let delegate = this.keyDelegateMap.get(key)
             
             if(delegate == null) throw new Error("Wron key");
-            delegate(this.turtle)
+            delegate(this.turtle);
             print(this.map.getModel());
             print("x: " + this.turtle.position.x, "y: "+ this.turtle.position.y, "z: " + this.turtle.position.z, this.turtle.direction.name)
         }

@@ -1,4 +1,6 @@
+import { turtleDI } from "./TurtleCore/TurtleBinding";
 import { KeyBoardControlVisualization } from "./Visualization/KeyBoardContolVisualization";
+import { TurtleVisualizationMock } from "./Visualization/TurtleVisualizationMock";
 
 class Program{
 
@@ -8,6 +10,7 @@ class Program{
     }
 }
 
-let program = new Program();
+const program = new Program();
+turtleDI.setTurtle(new TurtleVisualizationMock());
 Program.Main();
 

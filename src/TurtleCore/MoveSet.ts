@@ -1,7 +1,7 @@
-import { Axis } from "./Axis";
 import { IMoveSet } from "./IMoveSet";
 import { Position } from "./Position";
 import { PredictMoveSet } from "./PredictMoveSet";
+import { turtleDI } from "./TurtleBinding";
 import { TurtleHeadDirection } from "./TurtleHeadDirection";
 
 
@@ -32,7 +32,7 @@ export class MoveSet implements IMoveSet {
             predictMoveset.forward();
             this._positon = predictMoveset.position;
         }
-        return this.doMove(turtle.forward, changePosition);
+        return this.doMove(turtleDI.getTurtle().forward, changePosition);
     }
 
     back(): boolean {
@@ -40,7 +40,7 @@ export class MoveSet implements IMoveSet {
             predictMoveset.back();
             this._positon = predictMoveset.position;
         }
-        return this.doMove(turtle.back, changePosition);
+        return this.doMove(turtleDI.getTurtle().back, changePosition);
     }
 
     up(): boolean {
@@ -48,7 +48,7 @@ export class MoveSet implements IMoveSet {
             predictMoveset.up();
             this._positon = predictMoveset.position;
         }
-        return this.doMove(turtle.up, changePosition);
+        return this.doMove(turtleDI.getTurtle().up, changePosition);
     }
 
     down(): boolean {
@@ -56,7 +56,7 @@ export class MoveSet implements IMoveSet {
             predictMoveset.down();
             this._positon = predictMoveset.position;
         }
-        return this.doMove(turtle.down, changePosition);
+        return this.doMove(turtleDI.getTurtle().down, changePosition);
     }
 
     turnLeft(): boolean {
@@ -64,7 +64,7 @@ export class MoveSet implements IMoveSet {
             predictMoveset.turnLeft();
             this._direction = predictMoveset.direction;
         }
-        return this.doMove(turtle.turnLeft, changeDirection);
+        return this.doMove(turtleDI.getTurtle().turnLeft, changeDirection);
     }
 
     turnRight(): boolean {
@@ -72,7 +72,7 @@ export class MoveSet implements IMoveSet {
             predictMoveset.forward();
             this._direction = predictMoveset.direction;
         }
-        return this.doMove(turtle.turnRight, changeDirection);
+        return this.doMove(turtleDI.getTurtle().turnRight, changeDirection);
     }
 
     private doMove(delegate: (this:void) => TurtleDoResult, handler: (predictMoveset: IMoveSet) => void) {

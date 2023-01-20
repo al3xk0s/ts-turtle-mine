@@ -8,6 +8,7 @@ enum VerticalMultiplier {
     Down = -1,
 }
 
+
 export class PredictMoveSet implements IMoveSet {
     constructor(initialPosition: Position, initialDirection: TurtleHeadDirection) {
         this._position = initialPosition;

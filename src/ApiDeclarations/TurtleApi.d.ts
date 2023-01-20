@@ -144,5 +144,3 @@ declare interface TurtleAPI {
   /** @see turtle.place */
   placeDown(this: void, text?: string): TurtleDoResult;
 }
-
-declare const turtle: TurtleAPI;
